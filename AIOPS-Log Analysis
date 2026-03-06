@@ -4,7 +4,7 @@ Step1 : Install Python
 sudo apt update && sudo apt install python3 python3-pip python3-venv -y
 
 Step 2: Download the Code
-git clone https://github.com/CloudDevOpsHub/AIOPS.git
+git clone https://github.com/avinashkumar-DevOps/AIOPS.git
 
 step 3: Create and activate the virtual environment
 python3 -m venv venv
