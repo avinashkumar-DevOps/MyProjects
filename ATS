@@ -1,61 +1,245 @@
-Part 1 AWS Ubuntu EC2 instance:
-Launch a new EC2 instance
-Ubuntu Server 20.04 LTS
-Allowing essential port i.e 8501
+# 🚀 AI Application Tracking System (ATS)
 
-----------------------------------------
+### AWS + Python + Streamlit + Google Gemini AI
 
-Part-2 Application installation 
-Step-1 update & Install Python 3.7+ and pip
+An **AI-powered Application Tracking System (ATS)** that analyzes resumes using **Google Gemini AI** and provides intelligent feedback.
 
-sudo apt update && sudo apt install python3 python3-pip python3-venv -y
+This project demonstrates integration of:
 
-Step-2  Install Git  
+* ☁️ **AWS EC2 (Ubuntu Server)**
+* 🐍 **Python**
+* 🎈 **Streamlit**
+* 🤖 **Google Gemini AI (GCP)**
 
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 🏗 Architecture
+
+```
+User Browser
+     │
+     ▼
+Streamlit Web App (Port 8501)
+     │
+     ▼
+Python ATS Application
+     │
+     ▼
+Google Gemini AI API (GCP)
+     │
+     ▼
+AI Resume Analysis & Feedback
+```
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 📌 Prerequisites
+
+Before starting, make sure you have:
+
+* AWS Account
+* Google Cloud Platform Account
+* Basic Linux knowledge
+* SSH access to EC2 instance
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# ☁️ Part 1: Launch AWS Ubuntu EC2 Instance
+
+1. Login to **AWS Console**
+2. Go to **EC2 → Launch Instance**
+
+### Instance Configuration
+
+| Parameter     | Value                   |
+| ------------- | ----------------------- |
+| AMI           | Ubuntu Server 24.04 LTS |
+| Instance Type | t2.micro                |
+| Storage       | Default                 |
+| Key Pair      | Create / Use existing   |
+
+### Security Group Rules
+
+| Port | Purpose           |
+| ---- | ----------------- |
+| 22   | SSH               |
+| 8501 | Streamlit Web App |
+
+Connect to your instance using SSH.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# ⚙️ Part 2: Install Required Packages
+
+## Update System & Install Python
+
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv -y
+```
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Install Git (Optional)
+
+Skip this step if Git is already installed.
+
+```bash
 sudo apt install git -y
+```
 
-Step-3 Install Poppler (for pdf2image)
-Step-4 
+## Install Poppler (Required for PDF Processing)
 
+Poppler is required for **pdf2image**.
+
+```bash
 sudo apt install poppler-utils -y
+```
+------------------------------------------------------------------------------------------------------------------------------------------------
 
+# 🐍 Part 3: Setup Python Application
 
----------------------
-Python App 
+## Clone the Repository
 
-Step-1 Download Code
+```bash
+git clone https://github.com/avinashkumar-DevOps/Application-Tracking-System.git
+```
+## Navigate to Project Directory
 
-git clone https://github.com/CloudDevOpsHub/Application-Tracking-System.git
-
-
-Step-2  
+```bash
 cd Application-Tracking-System
+```
+------------------------------------------------------------------------------------------------------------------------------------------------
 
-Step-3 Set Up a Virtual Environment
+## Create Virtual Environment
 
- python3 -m venv venv
- source venv/bin/activate
+```bash
+python3 -m venv venv
+```
+## Activate Virtual Environment
 
-Step-4 Install Project Dependencies
- pip install --upgrade pip
- pip install -r requirements.txt
- pip install google-generativeai
+```bash
+source venv/bin/activate
+```
+------------------------------------------------------------------------------------------------------------------------------------------------
 
+## Install Dependencies
 
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+pip install google-generativeai
+```
 
-AWS + GCP + AI ATS System  
-Part 4 AI Gemini Setup 
+------------------------------------------------------------------------------------------------------------------------------------------------
 
-Get Gemini API Key from Google Cloud Platform (GCP)
-Go to google cloud console à Create project àsearch gemini apiàclick on gemini api --> manage -->Generative Language API->credentials --> create credentails -->get api
+# 🤖 Part 4: Setup Google Gemini AI (GCP)
 
-Part-5 Connect AWS ATS application with GCP Gemini AI
- 
-1.Add the API Key to Streamlit Secrets
+## Get Gemini API Key
+
+1. Open **Google Cloud Console**
+2. Create a **New Project**
+3. Search for **Gemini API**
+4. Click **Enable / Manage**
+5. Navigate to:
+
+```
+Generative Language API → Credentials
+```
+
+6. Click **Create Credentials**
+7. Generate **API Key**
+
+Copy the API key.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 🔗 Part 5: Connect ATS Application with Gemini AI
+
+## Create Streamlit Secrets File
+
+```bash
 mkdir -p .streamlit
 vi .streamlit/secrets.toml
+```
 
+Add your API key:
+
+```toml
 GOOGLE_API_KEY = "your-api-key-here"
+```
+------------------------------------------------------------------------------------------------------------------------------------------------
 
-2.Run the Streamlit App
-    streamlit run app.py --server.port 8501 --server.enableCORS false
+# ▶️ Run the Streamlit Application
+
+```bash
+streamlit run app.py --server.port 8501 --server.enableCORS false
+```
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 🌐 Access the Application
+
+Open in your browser:
+
+```
+http://<EC2-PUBLIC-IP>:8501
+```
+
+Example:
+
+```
+http://54.xx.xx.xx:8501
+```
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 📂 Project Structure
+
+```
+Application-Tracking-System
+│
+├── app.py
+├── requirements.txt
+├── README.md
+│
+├── .streamlit
+│   └── secrets.toml
+│
+└── utils
+```
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# ✨ Features
+
+* AI-powered **Resume Analysis**
+* **ATS Score Generation**
+* Resume **Keyword Matching**
+* **Job Description Comparison**
+* AI **Suggestions for Improvement**
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 🛠 Tech Stack
+
+| Technology       | Usage           |
+| ---------------- | --------------- |
+| AWS EC2          | Cloud Hosting   |
+| Ubuntu           | Server OS       |
+| Python           | Backend         |
+| Streamlit        | Web Interface   |
+| Google Gemini AI | Resume Analysis |
+| Poppler          | PDF Processing  |
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 👨‍💻 Author
+
+**Avinash Kumar**
+
+DevOps | Cloud | AI Integration
+
+GitHub
+[https://github.com/avinashkumar-DevOps](https://github.com/avinashkumar-DevOps)
+
